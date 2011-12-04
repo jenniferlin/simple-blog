@@ -1,0 +1,16 @@
+- Configure Apache & mod_WSGI
+Add the following into httpd.conf
+=================================
+LoadModule wsgi_module libexec/apache2/mod_wsgi.so
+
+ServerName localhost
+WSGIScriptAlias / /<absolute/path/to/simple-blog site>/simple-blog/apache/django.wsgi
+WSGIPythonPath /<absolute path to python site pkg>/.virtualenvs/mypython27/lib/python2.7/site-packages
+<Directory /<absolute/path/to/simple-blog site>/simple-blog/apache>
+Order deny,allow
+Allow from all
+</Directory>
+=================================
+
+- restart Apache after changing its https.conf as above
+- python manage.py runserver 0:8080

@@ -1,0 +1,38 @@
+{% extends "blogposts/base_blog.html" %}
+
+{% block content %}
+    {% if blogposts %}
+        <p>This is the blogpost index page</p>
+        <ul>
+            {% for post in blogposts.object_list %}
+                <li><a href="/blogposts/{{ post.slug }}/">{{ post.title }}</a> 
+
+                {% if user.is_active and user.is_staff %}
+                        <strong><a href="/blogposts/{{ post.slug }}/edit">[Edit]</a></strong>
+                {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="pagination">
+            <span class="step-links">
+                {% if blogposts.has_previous %}
+                    <a href="?page={{ blogposts.previous_page_number }}"><< previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ blogposts.number }} of {{ blogposts.paginator.num_pages }}.
+                </span>
+
+                {% if blogposts.has_next %}
+                    <a href="?page={{ blogposts.next_page_number }}">next >></a>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <p>No Blogposts are available.</p>
+    {% endif %}
+    {% if user.is_active and user.is_staff %}
+        <strong><a href="/blogposts/create/">[Add new Blog]</a></strong>
+    {% endif %}
+{% endblock %}    

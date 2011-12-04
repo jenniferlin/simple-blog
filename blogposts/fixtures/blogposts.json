@@ -1,0 +1,15 @@
+[
+  {
+    "model": "blogposts.blogpost",
+    "pk": 1,
+    "fields": {
+      "author": "John",
+      "title": "My first blog",
+      "slug": "My-first-blog",
+      "body":"It’s sometimes useful to pre-populate your database with hard-coded data when you’re first setting up an app. There’s a couple of ways you can have Django automatically create this data: you can provide initial data via fixtures, or you can provide initial data as SQL.
+
+In general, using a fixture is a cleaner method since it’s database-agnostic, but initial SQL is also quite a bit more flexible.",
+      "pub_date": "2011-10-28",
+    }
+  },
+]

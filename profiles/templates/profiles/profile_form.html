@@ -1,0 +1,22 @@
+{% extends "profiles/base_profile.html" %}
+
+
+{% block title %}Profile form{% endblock %}
+
+
+{% block content_title %}
+  <h2>Profile form</h2>
+{% endblock %}
+
+
+
+{% block content %}
+  <form action="." method="post" enctype="multipart/form-data" class="profile_form">{% csrf_token %}
+    <table>
+      {{ user_form.as_table }}
+      {{ profile_form.as_table }}
+    </table>
+    
+    <p><input class="button" type="submit" value="Save"></p>
+  </form>
+{% endblock %}

@@ -1,0 +1,25 @@
+[
+    {
+        "model" : "auth.user",
+        "pk" : "1",
+        "fields" : {
+            "username": "test1",
+            "first_name": "test1",
+            "last_name": "test",
+            "email": "test1@test.com",
+            "password" : "test"
+        }
+    },
+    {
+        "model" : "auth.user",
+        "pk" : "2",
+        "fields" : {
+            "username": "test2",
+            "first_name": "test2",
+            "last_name": "test",
+            "email": "test2@test.com",
+            "password" : "test"
+        }
+    }
+    
+]

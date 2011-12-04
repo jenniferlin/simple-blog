@@ -1,0 +1,20 @@
+{% extends "blogposts/base_blog.html" %}
+
+
+{% block title %}Blogpost form{% endblock %}
+
+
+{% block content_title %}
+  <h2>Blogpost form</h2>
+{% endblock %}
+
+
+{% block content %}
+  <form action="{{ form_action }}" method="post" enctype="multipart/form-data" class="blogpost_form">{% csrf_token %}
+    <table>
+      {{ blogpost_form.as_table }}
+    </table>
+    
+    <p><input class="button" type="submit" value="Save"></p>
+  </form>
+{% endblock %}

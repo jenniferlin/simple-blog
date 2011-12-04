@@ -1,0 +1,10 @@
+{% extends "mybase.html" %}
+{% block extrastyle %}{% load adminmedia %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/dashboard.css" />{% endblock %}
+
+
+{% block branding %}
+<h1 id="site-name">Sample BlogPost Site</h1>
+{% endblock %}
+
+
+{% block bodyclass %}profiles{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "profiles/base_profile.html" %}
+
+
+{% block title %}Profile for {{ object.user.username }}{% endblock %}
+
+
+{% block content_title %}
+    <h1>Profile for {{ object.user.username }}</h1>
+{% endblock %}
+
+
+{% block content %}
+    <h2 id="user_name">{{ object.user.username }}<br/>
+      <em id="user_city">{{ object.city }}, {{ object.state }}</em></h2>
+    <h3 id="user_age_and_gender">{{ object.get_gender_display }}</h3>  
+{% endblock %}

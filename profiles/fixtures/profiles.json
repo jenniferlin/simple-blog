@@ -1,0 +1,24 @@
+[
+    {
+        "model" : "profiles.profile",
+        "pk" : "1",
+        "fields" : {
+            "user": 1,
+            "gender": 1,
+            "address1": "111 Testing St.",
+            "city": "CA",
+            "zip": "94043",
+        }
+    },
+    {
+        "model" : "profiles.profile",
+        "pk" : "2",
+        "fields" : {
+            "user": 2,
+            "gender": 1,
+            "address1": "222 Testing St.",
+            "city": "CA",
+            "zip": "94043",
+        }
+    }
+]
