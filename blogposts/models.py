@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 import datetime
-# from django.contrib.comments.models import *
 
 class Blogpost(models.Model):
     author = models.ForeignKey(User)
@@ -22,15 +21,3 @@ class Blogpost(models.Model):
         return self.pub_date.date() == datetime.date.today()
     was_published_today.short_description = 'Published today?'
     
-# class Comment(models.Model):
-#     # Who posted this comment? If ``user`` is set then it was an authenticated
-#     # user; otherwise at least user_name should have been set and the comment
-#     # was posted by a non-authenticated user.
-#     user = models.ForeignKey(User, blank=True, null=True)
-#     user_name = models.CharField("user's name", max_length=50, blank=True)
-#     comment = models.TextField(max_length=3000)
-#     submit_date = models.DateTimeField('date/time submitted', default=None)
-#     blogpost = models.ForeignKey(Blogpost)
-# 
-#     def __unicode__(self):
-#         return "%s: %s..." % (self.user_name, self.comment[:50])

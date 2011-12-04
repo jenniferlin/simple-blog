@@ -6,7 +6,6 @@ from django.db.models import permalink
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import PhoneNumberField
 
-
 class Profile(models.Model):
     """Profile model"""
     GENDER_CHOICES = (

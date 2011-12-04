@@ -12,8 +12,6 @@ from functools import wraps
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-# from django.http import HttpResponse
-# from django.template import Context, loader
 from django.contrib.admin.views import decorators
 from django.contrib.admin.forms import AdminAuthenticationForm
 from django.contrib.auth.views import login
@@ -55,49 +53,13 @@ def index(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         blogposts = paginator.page(paginator.num_pages)
-
-    return render_to_response('blogposts/index.html', {"blogposts": blogposts})
-        
-    # latest_blog_list = Blogpost.objects.all().order_by('-pub_date')[:5]
-    # t = loader.get_template('blogposts/index.html')
-    # c = Context({
-    #     'latest_blog_list': latest_blog_list,
-    # })
-    # return HttpResponse(t.render(c))
-    # return render_to_response('blogposts/index.html',{'latest_blog_list': latest_blog_list},
-    #                           context_instance=RequestContext(request))
+    return render_to_response('blogposts/index.html', {"blogposts": blogposts}, context_instance=RequestContext(request))
     
 def detail(request, slug):
     blog = get_object_or_404(Blogpost, slug=slug)
-    # data =dict()
-    # if request.user.is_authenticated():
-    #     data["name"] = request.user.get_full_name() or request.user.username
-    # if request.user.is_authenticated():
-    #     print "in detail..user is authenticated"
-    #     c.user_name = request.user.get_full_name() or request.user.username
-    #     c.user = request.user
-    # form = CommentForm(c)
-    # form.name = request.user.get_full_name() or request.user.username
-    # form = CommentForm(Comment(), data=data)
     return render_to_response('blogposts/detail.html', {'blogpost':blog, 'form':CommentForm(blog)},
                               context_instance=RequestContext(request))
                               
-
-def comment_create(request, slug, template_name='blogposts/detail.html'):
-    blog = get_object_or_404(Blogpost, slug=slug)
-    comment = Comment(pk=blog.id, user=request.user)
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST, instance=comment)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('blogposts.views.detail', args=(blog.slug,)))
-    else:
-        form = CommentForm(instance=comment)
-        
-    context = { 'form': form,
-                'comment' : comment}
-    return render_to_response(template_name, context, context_instance=RequestContext(request))
     
 @staff_member_required
 def create_or_edit(request, slug=None, template_name='blogposts/form.html'):
@@ -121,38 +83,3 @@ def create_or_edit(request, slug=None, template_name='blogposts/form.html'):
                 'form_action' : form_action}
     return render_to_response(template_name, context, context_instance=RequestContext(request))
                                   
-# @staff_member_required
-# def create(request, template_name='blogposts/form.html'):
-#     print "in create"
-#     if request.POST:
-#         blog = Blogpost()
-#         print "I m here!!! in post"
-#         blogpost_form = BlogpostForm(request.POST, request.FILES, instance=blog)
-#         if blogpost_form.is_valid():
-#             blogpost_form.save()
-#             return HttpResponseRedirect(reverse('blogposts.views.detail', args=(slug,)))
-#             
-#     context = { 'blogpost_form': BlogpostForm() }
-#     return render_to_response(template_name, context, context_instance=RequestContext(request))
-                                  
-def comment(request):
-    # Fill out some initial data fields from an authenticated user, if present
-    data = request.POST.copy()
-    blog = get_object_or_404(Blogpost, pk=data['blogpost_id'])
-    
-    if request.user.is_authenticated():
-        if not data.get('name', ''):
-            data["name"] = request.user.get_full_name() or request.user.username
-    
-    if request.method == 'POST':
-        form = CommentForm(data=data)
-        if form.is_valid():
-            comment = form.get_comment_object()
-            if request.user.is_authenticated():
-                comment.user = request.user
-            comment.blogpost = blog
-            comment.save()
-            return HttpResponseRedirect(reverse('blogposts.views.detail', args=(blog.id,)))
-    return render_to_response('blogposts/detail.html', {'blogpost':blog, 'comment_list':blog.comment_set.all(), 'form':form},
-                                context_instance=RequestContext(request))            
-    

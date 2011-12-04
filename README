@@ -14,3 +14,5 @@ Allow from all
 
 - restart Apache after changing its https.conf as above
 - python manage.py runserver 0:8080
+
+Check on http://localhost:8080/
