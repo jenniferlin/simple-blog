@@ -12,7 +12,12 @@ Allow from all
 </Directory>
 =================================
 
-- restart Apache after changing its https.conf as above
-- python manage.py runserver 0:8080
+- restart Apache after changing the https.conf as above
+- Start the app as
+  python manage.py runserver 0:8080
 
 Check on http://localhost:8080/
+
+- Login as user with staff permission and you will see in http://localhost:8080/blogposts/ that you are allowed to edit or create new blogpost
+
+- Login as regular signin user without staff permission and you will not be able to edit or create new blogpost in http://localhost:8080/blogposts/
