@@ -36,3 +36,6 @@ Check on http://localhost:8080/
 - Login as user with staff permission and you will see in http://localhost:8080/blogposts/ that you are allowed to edit or create new blogpost
 
 - Login as regular signin user without staff permission and you will not be able to edit or create new blogpost in http://localhost:8080/blogposts/
+
+- Blogpost index page include Pagination (5 blogposts each page)
+- provide profile edit page for registered user to update personal infomation

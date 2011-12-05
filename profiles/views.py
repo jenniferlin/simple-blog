@@ -10,6 +10,17 @@ from profiles.forms import *
 
 
 @login_required
+def profile_detail(request, username):
+    try:
+        user = User.objects.get(username__iexact=username)
+    except User.DoesNotExist:
+        raise Http404
+    profile = Profile.objects.get(user=user)
+    context = { 'object':profile }
+    return render_to_response('profiles/profile_detail.html', context, context_instance=RequestContext(request))
+
+
+@login_required
 def profile_edit(request, template_name='profiles/profile_form.html'):
     """Edit profile."""
 
