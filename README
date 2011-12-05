@@ -13,6 +13,21 @@ Allow from all
 =================================
 
 - restart Apache after changing the https.conf as above
+- Before starting the app
+  Create a database name called "votizen" or modify settings.py database part as follows:
+  DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': '<database name>',              
+        'USER': '<db user name>',                      
+        'PASSWORD': '<password>',                  
+        'HOST': '',                      
+        'PORT': '',                      
+    }
+  }
+  
+  run python manage.py syncdb
+  
 - Start the app as
   python manage.py runserver 0:8080
 
